@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EvoRoutine - Tu evolución, día a día. Rutinas personalizadas que se adaptan a tu progreso real.">
+    <meta name="keywords" content="rutinas, fitness, productividad, hábitos, adaptación inteligente">
+    <meta name="author" content="emitab">
+    <title>EvoRoutine - Tu evolución, día a día</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2L37 11V29L20 38L3 29V11L20 2Z" stroke="url(#logo-gradient)" stroke-width="2"/>
+                        <path d="M20 12V28M14 20H26" stroke="url(#logo-gradient)" stroke-width="2.5" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="logo-gradient" x1="3" y1="2" x2="37" y2="38">
+                                <stop offset="0%" stop-color="#00ff88"/>
+                                <stop offset="100%" stop-color="#00cc6f"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>EvoRoutine</span>
+                </div>
+                <nav class="nav-menu">
+                    <a href="#features" class="nav-link">Características</a>
+                    <a href="#app" class="nav-link">Aplicación</a>
+                    <button class="btn-primary" id="btnGetStarted">Comenzar</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">🧬</span>
+                    <span>Adaptación Inteligente</span>
+                </div>
+                <h1 class="hero-title">
+                    Tu evolución,<br>
+                    <span class="gradient-text">día a día</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Rutinas personalizadas que aprenden de tu progreso real.<br>
+                    No más listas estáticas. Bienvenido a la evolución adaptativa.
+                </p>
+                <div class="hero-cta">
+                    <button class="btn-large btn-primary" id="btnHeroStart">Crear mi primera rutina</button>
+                    <button class="btn-large btn-secondary" id="btnDemo">Ver demo</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Tasa de cumplimiento</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3min</span>
+                        <span class="stat-label">Setup inicial</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Gratis y open source</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">¿Por qué EvoRoutine?</h2>
+                <p class="section-subtitle">Diseñado para adaptarse a ti, no al revés</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Personalización Total</h3>
+                    <p>Crea rutinas que se ajusten a tus objetivos reales: fitness, estudio, trabajo o bienestar.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Adaptación Inteligente</h3>
+                    <p>El sistema aprende de tu comportamiento y ajusta las rutinas automáticamente para maximizar resultados.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Seguimiento de Progreso</h3>
+                    <p>Visualiza tu evolución con estadísticas claras y motivadoras que te impulsan a seguir adelante.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Acceso Instantáneo</h3>
+                    <p>Web app sin instalaciones. Tu rutina te acompaña en todos tus dispositivos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Datos Seguros</h3>
+                    <p>Autenticación Firebase y almacenamiento encriptado. Tu progreso siempre protegido.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <h3>Modo Oscuro</h3>
+                    <p>Interfaz diseñada para no cansar la vista, perfecta para cualquier hora del día.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Section -->
+    <section class="app-section" id="app">
+        <div class="container">
+            <div class="app-container" id="appContainer">
+                <!-- Login Screen -->
+                <div class="auth-screen" id="authScreen">
+                    <div class="auth-content">
+                        <h2>Comenzá tu evolución</h2>
+                        <p>Ingresá para acceder a tus rutinas personalizadas</p>
+                        <form class="auth-form" id="authForm">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" placeholder="tu@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Contraseña</label>
+                                <input type="password" id="password" placeholder="••••••••" required>
+                            </div>
+                            <button type="submit" class="btn-primary btn-full">Ingresar</button>
+                        </form>
+                        <div class="auth-divider">
+                            <span>o</span>
+                        </div>
+                        <button class="btn-secondary btn-full" id="btnDemoMode">Probar modo demo</button>
+                        <p class="auth-footer">¿No tenés cuenta? <a href="#" id="btnRegister">Registrate gratis</a></p>
+                    </div>
+                </div>
+
+                <!-- Main App Screen -->
+                <div class="main-app" id="mainApp" style="display: none;">
+                    <div class="app-header">
+                        <div class="user-info">
+                            <div class="user-avatar">U</div>
+                            <div>
+                                <h3 id="userName">Usuario Demo</h3>
+                                <p id="userStreak">🔥 3 días consecutivos</p>
+                            </div>
+                        </div>
+                        <button class="btn-icon" id="btnSettings">⚙️</button>
+                    </div>
+
+                    <div class="app-tabs">
+                        <button class="tab-btn active" data-tab="today">Hoy</button>
+                        <button class="tab-btn" data-tab="routines">Mis Rutinas</button>
+                        <button class="tab-btn" data-tab="progress">Progreso</button>
+                    </div>
+
+                    <!-- Today Tab -->
+                    <div class="tab-content active" id="tabToday">
+                        <div class="today-header">
+                            <h2>Rutina de hoy</h2>
+                            <p class="today-date" id="todayDate"></p>
+                        </div>
+                        <div class="tasks-list" id="tasksList">
+                            <!-- Tasks will be dynamically loaded -->
+                        </div>
+                        <button class="btn-add" id="btnAddTask">+ Agregar actividad</button>
+                    </div>
+
+                    <!-- Routines Tab -->
+                    <div class="tab-content" id="tabRoutines" style="display: none;">
+                        <div class="routines-header">
+                            <h2>Mis Rutinas</h2>
+                            <button class="btn-primary" id="btnCreateRoutine">+ Nueva rutina</button>
+                        </div>
+                        <div class="routines-grid" id="routinesGrid">
+                            <!-- Routines will be dynamically loaded -->
+                        </div>
+                    </div>
+
+                    <!-- Progress Tab -->
+                    <div class="tab-content" id="tabProgress" style="display: none;">
+                        <div class="progress-header">
+                            <h2>Tu Progreso</h2>
+                            <select id="progressPeriod" class="select-period">
+                                <option value="week">Esta semana</option>
+                                <option value="month">Este mes</option>
+                                <option value="year">Este año</option>
+                            </select>
+                        </div>
+                        <div class="progress-stats">
+                            <div class="progress-card">
+                                <div class="progress-icon">✅</div>
+                                <div class="progress-data">
+                                    <h3 id="completedTasks">0</h3>
+                                    <p>Tareas completadas</p>
+                                </div>
+                            </div>
+                            <div class="progress-card">
+                                <div class="progress-icon">📈</div>
+                                <div class="progress-data">
+                                    <h3 id="completionRate">0%</h3>
+                                    <p>Tasa de cumplimiento</p>
+                                </div>
+                            </div>
+                            <div class="progress-card">
+                                <div class="progress-icon">🔥</div>
+                                <div class="progress-data">
+                                    <h3 id="currentStreak">0</h3>
+                                    <p>Racha actual</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="progressChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 2L37 11V29L20 38L3 29V11L20 2Z" stroke="url(#footer-gradient)" stroke-width="2"/>
+                            <path d="M20 12V28M14 20H26" stroke="url(#footer-gradient)" stroke-width="2.5" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="footer-gradient" x1="3" y1="2" x2="37" y2="38">
+                                    <stop offset="0%" stop-color="#00ff88"/>
+                                    <stop offset="100%" stop-color="#00cc6f"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>EvoRoutine</span>
+                    </div>
+                    <p>Tu evolución, día a día</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Producto</h4>
+                        <a href="#features">Características</a>
+                        <a href="#app">Aplicación</a>
+                        <a href="https://github.com/emitab/EvoRoutine-Page">Documentación</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Recursos</h4>
+                        <a href="#">Guía de inicio</a>
+                        <a href="#">FAQ</a>
+                        <a href="#">Soporte</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="#">Privacidad</a>
+                        <a href="#">Términos</a>
+                        <a href="#">Licencia</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Hecho con ♥️ por emitab</p>
+                <p>© 2026 EvoRoutine. Open Source.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="modalCreateTask" style="display: none;">
+        <div class="modal-overlay" onclick="closeModal('modalCreateTask')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Nueva Actividad</h3>
+                <button class="btn-close" onclick="closeModal('modalCreateTask')">✕</button>
+            </div>
+            <form class="modal-form" id="formCreateTask">
+                <div class="form-group">
+                    <label>Nombre de la actividad</label>
+                    <input type="text" id="taskName" placeholder="Ej: Entrenar piernas" required>
+                </div>
+                <div class="form-group">
+                    <label>Categoría</label>
+                    <select id="taskCategory">
+                        <option value="fitness">💪 Fitness</option>
+                        <option value="study">📚 Estudio</option>
+                        <option value="work">💼 Trabajo</option>
+                        <option value="wellness">🧘 Bienestar</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Duración estimada (minutos)</label>
+                    <input type="number" id="taskDuration" value="30" min="5" max="240">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('modalCreateTask')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Crear actividad</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modalCreateRoutine" style="display: none;">
+        <div class="modal-overlay" onclick="closeModal('modalCreateRoutine')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Nueva Rutina</h3>
+                <button class="btn-close" onclick="closeModal('modalCreateRoutine')">✕</button>
+            </div>
+            <form class="modal-form" id="formCreateRoutine">
+                <div class="form-group">
+                    <label>Nombre de la rutina</label>
+                    <input type="text" id="routineName" placeholder="Ej: Entrenamiento matinal" required>
+                </div>
+                <div class="form-group">
+                    <label>Objetivo principal</label>
+                    <select id="routineGoal">
+                        <option value="fitness">🏋️ Mejorar fitness</option>
+                        <option value="productivity">⚡ Aumentar productividad</option>
+                        <option value="learning">🎓 Aprender nuevas habilidades</option>
+                        <option value="wellness">🌟 Bienestar general</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Frecuencia semanal</label>
+                    <input type="number" id="routineFrequency" value="3" min="1" max="7">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('modalCreateRoutine')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Crear rutina</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
