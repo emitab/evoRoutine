@@ -546,6 +546,39 @@
         </div>
     </div>
 
+    <!-- Delete Account Confirmation Modal -->
+    <div class="modal" id="deleteAccountModal" style="z-index: 1100;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-i18n="settings.deleteWarning" style="color: #ef4444;">¿Estás absolutamente seguro?</h3>
+                <button class="btn-icon" id="closeDeleteModal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p data-i18n="settings.deleteConfirm" style="margin-bottom: var(--spacing-lg);">
+                    Esta acción eliminará permanentemente todos tus datos, rutinas y progreso. No se puede deshacer.
+                </p>
+                <div class="danger-zone" style="background: rgba(239, 68, 68, 0.1); border-color: #ef4444;">
+                    <button class="btn-danger btn-full" id="confirmDeleteAccountBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        </svg>
+                        <span data-i18n="settings.deleteAccount">Eliminar cuenta permanentemente</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelDeleteBtn" data-i18n="modal.cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <script src="i18n.js"></script>
     <script src="exercises.js"></script>
     <script src="app.js"></script>

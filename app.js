@@ -76,13 +76,17 @@ class EvoRoutineApp {
         this.elements.settingsModal = document.getElementById('settingsModal');
         this.elements.taskModal = document.getElementById('taskModal');
         this.elements.routineModal = document.getElementById('routineModal');
+        this.elements.deleteAccountModal = document.getElementById('deleteAccountModal');
     }
 
     setupEventListeners() {
         // Global clicks
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal')) {
-                this.closeAllModals();
+                // Don't close delete confirmation on click outside for safety
+                if (e.target.id !== 'deleteAccountModal') {
+                    this.closeAllModals();
+                }
             }
         });
 
@@ -107,8 +111,13 @@ class EvoRoutineApp {
         document.getElementById('closeSettingsModal').addEventListener('click', () => this.closeModal('settingsModal'));
         document.getElementById('cancelSettingsBtn').addEventListener('click', () => this.closeModal('settingsModal'));
         document.getElementById('saveSettingsBtn').addEventListener('click', () => this.saveSettings());
-        document.getElementById('deleteAccountBtn').addEventListener('click', () => this.deleteAccount());
+        document.getElementById('deleteAccountBtn').addEventListener('click', () => this.openDeleteConfirmation());
         document.getElementById('exportDataBtn').addEventListener('click', () => this.exportData());
+
+        // Delete Confirmation Modal Events
+        document.getElementById('closeDeleteModal').addEventListener('click', () => this.closeModal('deleteAccountModal'));
+        document.getElementById('cancelDeleteBtn').addEventListener('click', () => this.closeModal('deleteAccountModal'));
+        document.getElementById('confirmDeleteAccountBtn').addEventListener('click', () => this.confirmDeleteAccount());
 
         // Theme Toggles in Settings
         document.querySelectorAll('.theme-btn').forEach(btn => {
@@ -177,10 +186,19 @@ class EvoRoutineApp {
     }
 
     deleteAccount() {
-        if (confirm(this.i18n.t('settings.deleteConfirm'))) {
-            localStorage.clear();
-            location.reload();
-        }
+        // Legacy method replaced by openDeleteConfirmation for 2-step verification
+        this.openDeleteConfirmation();
+    }
+
+    openDeleteConfirmation() {
+        // Close settings modal first to focus on safety warning
+        this.closeModal('settingsModal');
+        this.elements.deleteAccountModal.classList.add('active');
+    }
+
+    confirmDeleteAccount() {
+        localStorage.clear();
+        location.reload();
     }
 
     // === UI & Theming ===

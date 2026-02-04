@@ -107,7 +107,8 @@ const translations = {
         'settings.export': 'Exportar datos',
         'settings.import': 'Importar datos',
         'settings.deleteAccount': 'Eliminar cuenta',
-        'settings.deleteConfirm': '¿Estás seguro de que querés eliminar tu cuenta? Esta acción no se puede deshacer.',
+        'settings.deleteConfirm': 'Esta acción eliminará permanentemente todos tus datos, rutinas y progreso. No se puede deshacer.',
+        'settings.deleteWarning': '¿Estás absolutamente seguro?',
         'settings.save': 'Guardar cambios',
         'settings.cancel': 'Cancelar',
 
@@ -297,7 +298,8 @@ const translations = {
         'settings.export': 'Export data',
         'settings.import': 'Import data',
         'settings.deleteAccount': 'Delete account',
-        'settings.deleteConfirm': 'Are you sure you want to delete your account? This action cannot be undone.',
+        'settings.deleteConfirm': 'This action will permanently delete all your data, routines, and progress. It cannot be undone.',
+        'settings.deleteWarning': 'Are you absolutely sure?',
         'settings.save': 'Save changes',
         'settings.cancel': 'Cancel',
 
