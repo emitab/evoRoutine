@@ -894,19 +894,24 @@ body {
 }
 
 .history-item {
-    display: flex;
-    align-items: center;
+    display: block;
     background: var(--card);
     border: 1px solid var(--border);
-    padding: 16px;
     border-radius: 16px;
     margin-bottom: 12px;
-    transition: transform 0.2s var(--ease);
+    transition: all 0.2s var(--ease);
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .history-item:hover {
-    transform: translateY(-2px);
     border-color: var(--primary);
+}
+
+.h-summary {
+    display: flex;
+    align-items: center;
+    padding: 16px;
 }
 
 .h-date {
@@ -937,15 +942,42 @@ body {
     color: var(--text-muted);
 }
 
-.h-icon {
-    width: 32px;
-    height: 32px;
-    background: var(--primary-glow);
+.h-arrow {
+    color: var(--text-muted);
+    transition: transform 0.3s var(--ease);
+}
+
+.history-item.expanded .h-arrow {
+    transform: rotate(180deg);
     color: var(--primary);
-    border-radius: 50%;
+}
+
+.h-details {
+    display: none;
+    padding: 0 16px 16px 16px;
+    border-top: 1px solid var(--border);
+    animation: slideDown 0.3s var(--ease);
+}
+
+.history-item.expanded .h-details {
+    display: block;
+}
+
+.h-row {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1rem;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.h-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.h-row span {
+    color: var(--text);
+    font-weight: 500;
 }

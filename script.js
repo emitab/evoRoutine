@@ -374,15 +374,35 @@ window.App = {
                 const totalSets = sess.routine.reduce((acc, ex) => acc + ex.sets, 0);
                 const exCount = sess.routine.length;
 
+                // Build details
+                const details = sess.routine.map(ex => {
+                    const info = CATALOG[ex.id];
+                    const name = info ? (info[I18n.lang] || info.en) : ex.id;
+                    let meta = '';
+                    // Format based on mode
+                    if (info.mode === 'time') meta = `${ex.target.val1}s`;
+                    else if (info.mode === 'body') meta = `${ex.target.val1} reps`;
+                    else meta = `${ex.target.val1} x ${ex.target.val2}kg`;
+
+                    return `<div class="h-row"><span>${name}</span> <small>${ex.sets} x ${meta}</small></div>`;
+                }).join('');
+
                 const el = document.createElement('div');
                 el.className = 'history-item animate-in';
+                el.onclick = function () { this.classList.toggle('expanded'); };
+
                 el.innerHTML = `
-                    <div class="h-date">${date}</div>
-                    <div class="h-info">
-                        <strong>${exCount} Exercises</strong>
-                        <small>${totalSets} Sets Completed</small>
+                    <div class="h-summary">
+                        <div class="h-date">${date}</div>
+                        <div class="h-info">
+                            <strong>${exCount} Exercises</strong>
+                            <small>${totalSets} Sets Completed</small>
+                        </div>
+                        <div class="h-arrow">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                        </div>
                     </div>
-                    <div class="h-icon">✓</div>
+                    <div class="h-details">${details}</div>
                 `;
                 list.appendChild(el);
             });
