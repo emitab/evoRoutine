@@ -263,8 +263,9 @@
         </div>
 
         <div class="fab-container two-btn">
-            <button class="btn btn-sec" onclick="App.activeWorkout[App.sess.idx].sets++; App.renderSet()">+ Set</button>
-            <button class="btn btn-primary" onclick="App.finishSet()">NEXT</button>
+            <button class="btn btn-sec" onclick="App.activeWorkout[App.sess.idx].sets++; App.renderSet()"
+                data-bind="sess.add">+ Set</button>
+            <button class="btn btn-primary" onclick="App.finishSet()" data-bind="sess.next">NEXT</button>
         </div>
     </section>
 
@@ -287,10 +288,10 @@
                 <button class="btn-text" onclick="App.adjustTimer(30)" style="font-size:0.8rem">+30s</button>
             </div>
 
-            <p style="opacity:0.6; margin-top:24px;">RECOVER</p>
+            <p style="opacity:0.6; margin-top:24px;" data-bind="sess.recover">RECOVER</p>
         </div>
         <div class="fab-container">
-            <button class="btn btn-primary" onclick="App.skipRest()">READY</button>
+            <button class="btn btn-primary" onclick="App.skipRest()" data-bind="sess.ready">READY</button>
         </div>
     </section>
 
