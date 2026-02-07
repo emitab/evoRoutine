@@ -1102,3 +1102,29 @@ body {
     transform: scale(0.95);
     border-color: var(--primary);
 }
+
+.btn-time-adj {
+    padding: 12px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+    min-width: 80px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font);
+}
+
+.btn-time-adj:active {
+    background: var(--bg);
+    border-color: var(--primary);
+    color: var(--text);
+    transform: scale(0.96);
+}
