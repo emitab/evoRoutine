@@ -350,7 +350,7 @@ const UI = {
 window.App = {
     user: null,
     activeWorkout: null,
-    sess: { idx: 0, set: 1, timer: null },
+    sess: { idx: 0, set: 1, timer: null, restTime: 90 },
     activeActionIdx: -1,
     selectorMode: 'add',
 
@@ -811,7 +811,7 @@ window.App = {
     },
 
     startSess: () => {
-        App.sess = { idx: 0, set: 1, timer: null };
+        App.sess = { idx: 0, set: 1, timer: null, restTime: 90 };
         App.renderSet();
         UI.goto('v-sess');
     },
@@ -891,20 +891,35 @@ window.App = {
     // Timer Logic
     doRest: () => {
         UI.goto('v-rest');
-        let t = App.user.settings.rTime || 90;
+        App.sess.restTime = App.user.settings.rTime || 90;
         const disp = document.getElementById('timer-disp');
 
         if (App.sess.timer) clearInterval(App.sess.timer);
+
         const tick = () => {
-            const m = Math.floor(t / 60);
-            const s = (t % 60).toString().padStart(2, '0');
+            if (App.sess.restTime < 0) App.sess.restTime = 0;
+            const m = Math.floor(App.sess.restTime / 60);
+            const s = (App.sess.restTime % 60).toString().padStart(2, '0');
             disp.textContent = `${m}:${s}`;
         };
         tick();
+
         App.sess.timer = setInterval(() => {
-            t--; tick();
-            if (t <= 0) App.skipRest();
+            App.sess.restTime--;
+            tick();
+            if (App.sess.restTime <= 0) App.skipRest();
         }, 1000);
+    },
+
+    adjustTimer: (delta) => {
+        App.sess.restTime += delta;
+        if (App.sess.restTime < 0) App.sess.restTime = 0;
+
+        // Update display immediately
+        const m = Math.floor(App.sess.restTime / 60);
+        const s = (App.sess.restTime % 60).toString().padStart(2, '0');
+        const disp = document.getElementById('timer-disp');
+        if (disp) disp.textContent = `${m}:${s}`;
     },
 
     skipRest: () => {

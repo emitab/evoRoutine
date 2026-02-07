@@ -265,10 +265,23 @@
     <!-- VIEW: REST -->
     <section id="v-rest" class="view">
         <div class="center-content">
-            <div class="timer-ring">
-                <span id="timer-disp">01:30</span>
+            <div class="rest-controls" style="display:flex; align-items:center; gap:24px; margin-bottom: 24px;">
+                <button class="btn-circle-sm" onclick="App.adjustTimer(-10)">-10</button>
+
+                <div class="timer-ring"
+                    style="margin:0; width:180px; height:180px; font-size:3.5rem; border-top-color:var(--primary);">
+                    <span id="timer-disp">01:30</span>
+                </div>
+
+                <button class="btn-circle-sm" onclick="App.adjustTimer(10)">+10</button>
             </div>
-            <p style="opacity:0.6; margin-top:16px;">RECOVER</p>
+
+            <div style="display:flex; gap:16px;">
+                <button class="btn-text" onclick="App.adjustTimer(-30)" style="font-size:0.8rem">-30s</button>
+                <button class="btn-text" onclick="App.adjustTimer(30)" style="font-size:0.8rem">+30s</button>
+            </div>
+
+            <p style="opacity:0.6; margin-top:24px;">RECOVER</p>
         </div>
         <div class="fab-container">
             <button class="btn btn-primary" onclick="App.skipRest()">READY</button>
