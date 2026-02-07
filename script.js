@@ -223,7 +223,7 @@ const CATALOG = {
     "curl": { muscle: "pull", mode: "load", en: "Bicep Curl", es: "Curl Bíceps" },
     "ext": { muscle: "push", mode: "load", en: "Tricep Ext", es: "Ext. Tríceps" },
     "pushup": { muscle: "push", mode: "body", en: "Push Ups", es: "Flexiones" },
-    "squat_bw": { muscle: "legs", mode: "body", en: "Air Squat", es: "Sentadilla (Aire)" },
+    "squat_bw": { muscle: "legs", mode: "body", en: "Air Squat", es: "Sentadilla (Peso Corporal)" },
     "lunge_bw": { muscle: "legs", mode: "body", en: "Lunges", es: "Estocadas" }
 };
 
@@ -412,7 +412,14 @@ window.App = {
         UI.text('user-name', App.user.name);
         UI.text('sess-count', App.user.history.length);
         const goalKey = App.user.settings.goal.substring(0, 3);
-        UI.text('goal-label', goalKey.toUpperCase());
+        const goalFull = I18n.t(`goal.${goalKey}`);
+        const goalLabel = document.getElementById('goal-label');
+        goalLabel.textContent = goalFull;
+        if (goalFull.length > 8) {
+            goalLabel.style.fontSize = '1.4rem';
+        } else {
+            goalLabel.style.fontSize = '';
+        }
         UI.text('goal-desc', I18n.t(`goal.${goalKey}.d`));
         UI.renderApp();
 
