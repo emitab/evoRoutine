@@ -250,9 +250,20 @@ body {
     z-index: 30;
 }
 
-.two-btn {
-    display: flex;
-    gap: 12px;
+/* Session Actions Layout */
+.sess-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    gap: 8px;
+    align-items: center;
+}
+
+.sess-actions .btn {
+    padding: 16px 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    width: 100%;
+    margin: 0;
 }
 
 .logo-hero {

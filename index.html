@@ -262,7 +262,10 @@
             </div>
         </div>
 
-        <div class="fab-container two-btn">
+        <div class="fab-container sess-actions">
+            <button class="btn btn-sec"
+                onclick="if(App.activeWorkout[App.sess.idx].sets > 1 && App.activeWorkout[App.sess.idx].sets > App.sess.set) { App.activeWorkout[App.sess.idx].sets--; App.renderSet(); }"
+                data-bind="sess.sub">- Set</button>
             <button class="btn btn-sec" onclick="App.activeWorkout[App.sess.idx].sets++; App.renderSet()"
                 data-bind="sess.add">+ Set</button>
             <button class="btn btn-primary" onclick="App.finishSet()" data-bind="sess.next">NEXT</button>
