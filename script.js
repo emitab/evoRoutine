@@ -771,6 +771,13 @@ window.App = {
     },
 
     renderPlan: () => {
+        // Update Equip Button Visibility based on UI State
+        const sel = document.getElementById('plan-env');
+        const eqBtn = document.getElementById('btn-equip-edit');
+        if (eqBtn && sel) {
+            eqBtn.style.display = (sel.value === 'home') ? 'inline-block' : 'none';
+        }
+
         const list = document.getElementById('plan-list');
         list.innerHTML = '';
         App.activeWorkout.forEach((ex, i) => {
