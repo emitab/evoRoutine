@@ -455,11 +455,18 @@ window.App = {
         UI.text('user-name', App.user.name);
         UI.text('sess-count', App.user.history.length);
         const goalKey = App.user.settings.goal.substring(0, 3);
+        const lvlKey = App.user.settings.level.substring(0, 3);
         const goalFull = I18n.t(`goal.${goalKey}`);
+        const lvlFull = I18n.t(`lvl.${lvlKey}`);
+
+        const combinedText = `${goalFull} - ${lvlFull}`;
         const goalLabel = document.getElementById('goal-label');
-        goalLabel.textContent = goalFull;
-        if (goalFull.length > 8) {
-            goalLabel.style.fontSize = '1.4rem';
+        goalLabel.textContent = combinedText;
+
+        if (combinedText.length > 15) {
+            goalLabel.style.fontSize = '1.1rem';
+        } else if (combinedText.length > 10) {
+            goalLabel.style.fontSize = '1.3rem';
         } else {
             goalLabel.style.fontSize = '';
         }
