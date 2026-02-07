@@ -775,7 +775,9 @@ window.App = {
         const sel = document.getElementById('plan-env');
         const eqBtn = document.getElementById('btn-equip-edit');
         if (eqBtn && sel) {
-            eqBtn.style.display = (sel.value === 'home') ? 'inline-block' : 'none';
+            const show = sel.value === 'home';
+            eqBtn.style.display = show ? 'flex' : 'none';
+            if (show) console.log('Showing Equipment Button');
         }
 
         const list = document.getElementById('plan-list');
