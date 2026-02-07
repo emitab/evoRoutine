@@ -719,15 +719,22 @@ window.App = {
     // TRAINER ACTIONS
     openEquipSelector: () => {
         document.getElementById('equip-overlay').classList.add('active');
-        // Pre-check
+        document.getElementById('equip-sheet').classList.add('active');
+
+        // Pre-check checkboxes
         const eq = App.user.settings.equip || [];
-        document.getElementById('eq-du').checked = eq.includes('dumbbells');
-        document.getElementById('eq-ba').checked = eq.includes('bar');
-        document.getElementById('eq-jr').checked = eq.includes('rope');
+        const du = document.getElementById('eq-du');
+        const ba = document.getElementById('eq-ba');
+        const jr = document.getElementById('eq-jr');
+
+        if (du) du.checked = eq.includes('dumbbells');
+        if (ba) ba.checked = eq.includes('bar');
+        if (jr) jr.checked = eq.includes('rope');
     },
 
     closeEquipSelector: () => {
         document.getElementById('equip-overlay').classList.remove('active');
+        document.getElementById('equip-sheet').classList.remove('active');
     },
 
     saveEquipAndGen: async () => {
