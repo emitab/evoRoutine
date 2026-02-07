@@ -347,6 +347,7 @@ window.App = {
         if (email) {
             App.user = await Store.findUser(email);
             if (App.user) {
+                App.loadCustomCatalog();
                 I18n.setLang(App.user.settings.lang);
                 App.loadHub();
                 return;
@@ -492,7 +493,7 @@ window.App = {
 
         const newUser = {
             name: n, email: e, joined: Date.now(),
-            history: [],
+            history: [], customExercises: [],
             settings: { lang: 'es', theme: 'dark', goal: 'hypertrophy', level: 'intermediate', rTime: 90 }
         };
 
@@ -518,6 +519,7 @@ window.App = {
         if (u) {
             App.user = u;
             Store.session.set(email);
+            App.loadCustomCatalog();
             I18n.setLang(u.settings.lang);
             App.loadHub();
 
@@ -651,17 +653,84 @@ window.App = {
         const list = document.getElementById('ex-select-list');
         list.innerHTML = '';
 
+        // Add Create Button
+        const createBtn = document.createElement('div');
+        createBtn.className = 'ex-option';
+        createBtn.style.background = 'rgba(207, 245, 104, 0.1)';
+        createBtn.style.borderLeft = '4px solid var(--primary)';
+        createBtn.innerHTML = `<strong>+ ${I18n.lang === 'es' ? 'Crear Nuevo Ejercicio' : 'Create New Exercise'}</strong><small>${I18n.lang === 'es' ? 'Personalizado' : 'Custom'}</small>`;
+        createBtn.onclick = () => App.openCustomCreator();
+        list.appendChild(createBtn);
+
         Object.keys(CATALOG).forEach(k => {
             const info = CATALOG[k];
-            const name = info[I18n.lang] || info.en;
+            const name = info ? (info[I18n.lang] || info.en) : k;
             const el = document.createElement('div');
             el.className = 'ex-option';
             el.onclick = () => App.selectExercise(k);
-            el.innerHTML = `<strong>${name}</strong><small>${info.muscle}</small>`;
+            el.innerHTML = `<strong>${name}</strong><small>${info ? info.muscle : 'custom'}</small>`;
             list.appendChild(el);
         });
 
         document.getElementById('ex-selector-overlay').classList.add('active');
+    },
+
+    loadCustomCatalog: () => {
+        if (App.user && App.user.customExercises) {
+            App.user.customExercises.forEach(c => {
+                CATALOG[c.id] = {
+                    en: c.name, es: c.name,
+                    muscle: c.muscle || 'custom',
+                    mode: c.mode
+                };
+            });
+        }
+    },
+
+    openCustomCreator: () => {
+        document.getElementById('custom-ex-overlay').classList.add('active');
+        document.getElementById('ex-selector-overlay').classList.remove('active');
+        setTimeout(() => document.getElementById('cust-ex-name').focus(), 100);
+    },
+
+    closeCustomCreator: () => {
+        document.getElementById('custom-ex-overlay').classList.remove('active');
+        document.getElementById('ex-selector-overlay').classList.add('active');
+    },
+
+    saveCustomExercise: async () => {
+        const name = document.getElementById('cust-ex-name').value.trim();
+        const type = document.getElementById('cust-ex-type').value;
+        if (!name) return UI.toast(I18n.lang === 'es' ? 'Nombre requerido' : 'Name required');
+
+        const id = 'cust_' + Date.now();
+        const newEx = {
+            id: id,
+            name: name,
+            mode: type,
+            muscle: 'custom'
+        };
+
+        // Add to User
+        if (!App.user.customExercises) App.user.customExercises = [];
+        App.user.customExercises.push(newEx);
+        await Store.saveUser(App.user);
+
+        // Add to Catalog
+        CATALOG[id] = {
+            en: name, es: name,
+            muscle: 'custom',
+            mode: type
+        };
+
+        UI.toast(I18n.lang === 'es' ? 'Ejercicio Creado' : 'Exercise Created', 'success');
+        document.getElementById('custom-ex-overlay').classList.remove('active');
+
+        // Select directly
+        App.selectExercise(id);
+
+        // Clear input
+        document.getElementById('cust-ex-name').value = '';
     },
 
     closeExSelector: () => {
