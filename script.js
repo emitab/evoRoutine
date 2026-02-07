@@ -213,9 +213,12 @@ const CATALOG = {
     // Tier 1: Basic / Low Neuro / Bodyweight Easy
     "squat_bw": { muscle: "legs", mode: "body", tier: 1, en: "Air Squat", es: "Sentadilla (Peso Corporal)" },
     "lunge_bw": { muscle: "legs", mode: "body", tier: 1, en: "Lunges (Bodyweight)", es: "Estocadas (Peso Corporal)" },
-    "pushup": { muscle: "push", mode: "body", tier: 1, en: "Push Ups", es: "Flexiones" },
+    "pushup": { muscle: "push", mode: "body", tier: 1, en: "Pushups", es: "Flexiones" },
+    "knees_pushup": { muscle: "push", mode: "body", tier: 1, en: "Knee Pushups", es: "Flexiones (Rodillas)" },
     "plank": { muscle: "core", mode: "time", tier: 1, en: "Plank", es: "Plancha" },
     "crunch": { muscle: "core", mode: "body", tier: 1, en: "Crunches", es: "Abdominales" },
+    "superman": { muscle: "pull", mode: "body", tier: 1, en: "Superman", es: "Superman (Lumbares)" },
+    "glute_bridge": { muscle: "legs", mode: "body", tier: 1, en: "Glute Bridge", es: "Puente de Glúteos" },
 
     // Tier 2: Weighted Isolation / Moderate Compound / Skilled BW
     "lunge": { muscle: "legs", mode: "load", tier: 2, req: ["dumbbells"], en: "Weighted Lunges", es: "Estocadas con Carga" },
@@ -307,6 +310,15 @@ const Trainer = {
             schema.push('push');
         }
 
+        // Feature: If Rope Available, inject Cardio finisher or warm-up
+        if (env === 'home' && tools.includes('rope')) {
+            // Avoid duplicates if endurance already has it?
+            // Just append as finisher
+            schema.push('cardio');
+        }
+
+        const selectedIds = new Set();
+
         return schema.map(m => {
             const isHome = env === 'home';
 
@@ -323,11 +335,7 @@ const Trainer = {
                         if (!hasTools) return false;
                     }
 
-                    // If NO req (bodyweight/time) OR req met, verify portability logic just in case
-                    // Actually, if it has 'req' and met, it's valid. 
-                    // If it has NO req, we must ensure it's not a gym machine (like 'leg_press' - if we had it).
-                    // Our current catalog without 'req' is mostly bodyweight.
-                    // But to be safe, keep the portable check for items without explicit 'req'.
+                    // Strict Portability / Machine Check for items without req
                     if (!item.req) {
                         const portable = item.mode === 'body' || item.mode === 'time' || ['curl', 'lunge', 'row', 'ohp'].includes(k);
                         if (!portable) return false;
@@ -337,6 +345,9 @@ const Trainer = {
                 // Tier Filter
                 if (lvl === 'beginner' && item.tier > 2) return false;
                 if (lvl === 'advanced' && item.tier < 2) return false; // Strict advanced filter
+
+                // Exclude already selected exercises for variety
+                if (selectedIds.has(k)) return false;
 
                 return true;
             });
@@ -363,26 +374,32 @@ const Trainer = {
                 finalCandidates = finalCandidates.slice(0, 3);
             }
 
+            // Duplicate Prevention: Try to pick one not used
+            let available = finalCandidates.filter(id => !selectedIds.has(id));
+            if (available.length === 0) available = finalCandidates; // Fallback to duplicate if must
+
             // Absolute last resort
-            if (finalCandidates.length === 0) {
-                if (m === 'legs') finalCandidates = ['squat_bw'];
-                else if (m === 'push') finalCandidates = ['pushup'];
+            if (available.length === 0) {
+                if (m === 'legs') available = ['squat_bw'];
+                else if (m === 'push') available = ['pushup'];
                 else if (m === 'pull') {
-                    // If no pullup bar, what pull fallback?
-                    // If no bar and no dumbbells, then no pull exercise is possible from CATALOG.
-                    // Fallback to a general bodyweight exercise to avoid crash.
+                    // Fallback using Superman instead of Plank for Pull
                     if (isHome && !tools.includes('bar') && !tools.includes('dumbbells')) {
-                        finalCandidates = ['plank']; // General core/bodyweight if no pull options
+                        available = ['superman'];
                     } else {
-                        finalCandidates = ['pullup']; // Default if bar is available or not home
+                        available = ['pullup'];
                     }
                 }
-                else finalCandidates = ['plank'];
+                else if (m === 'cardio') available = ['jump_rope']; // Should imply rope exists, else Burpees? We don't have burpees.
+                else available = ['plank'];
             }
 
-            if (finalCandidates.length === 0) finalCandidates = ['squat_bw']; // Universal fallback to avoid crash
+            // Final Safety
+            if (available.length === 0) available = ['squat_bw'];
 
-            const pick = finalCandidates[Math.floor(Math.random() * finalCandidates.length)];
+            const pick = available[Math.floor(Math.random() * available.length)];
+            selectedIds.add(pick); // Mark as used
+
             const data = CATALOG[pick];
             const smartParams = Trainer.getSmartTargets(user, pick, data.mode);
 
