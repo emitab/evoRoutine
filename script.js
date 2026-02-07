@@ -29,7 +29,7 @@ const I18n = {
             "sett.title": "Settings", "sett.lang": "Language", "sett.theme": "Theme",
             "sett.privacy": "Privacy & Data", "sett.support": "Support", "sett.export": "Export My Data", "sett.clear": "Clear Cache",
             "sett.tutorial": "Replay Tutorial", "sett.about": "About / Help", "sett.logout": "Logout", "sett.delete": "Delete Account",
-            "msg.welcome": "Welcome to EvoRoutine! We've sent a detailed guide to",
+            "msg.welcome": "Welcome to EvoRoutine!",
             "msg.email_sent": "Email sent!", "msg.deleted": "Account deleted successfully.", "msg.data_exported": "Data exported!",
             "msg.cache_cleared": "Cache cleared successfully.",
             "confirm.delete": "Are you sure you want to delete your account? This action cannot be undone.",
@@ -92,8 +92,8 @@ const I18n = {
             "sett.title": "Ajustes", "sett.lang": "Idioma", "sett.theme": "Tema",
             "sett.privacy": "Privacidad y Datos", "sett.support": "Soporte", "sett.export": "Exportar Mis Datos", "sett.clear": "Limpiar Caché",
             "sett.tutorial": "Repetir Tutorial", "sett.about": "Acerca de / Ayuda", "sett.logout": "Cerrar Sesión", "sett.delete": "Eliminar Cuenta",
-            "msg.welcome": "¡Bienvenido a EvoRoutine! Hemos enviado una guía a",
-            "msg.email_sent": "¡Correo enviado!", "msg.deleted": "Cuenta eliminada exitosamente.", "msg.data_exported": "¡Datos exportados!",
+            "msg.welcome": "¡Bienvenido a EvoRoutine!",
+            "msg.deleted": "Cuenta eliminada exitosamente.", "msg.data_exported": "¡Datos exportados!",
             "msg.cache_cleared": "Caché limpiado exitosamente.",
             "confirm.delete": "¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.",
             "confirm.delete2": "Esto eliminará permanentemente todos tus datos. Escribe ELIMINAR para confirmar:",
@@ -532,9 +532,6 @@ window.App = {
         App.user = newUser;
         Store.session.set(e);
 
-        // Welcome Email Simulation
-        UI.toast('Sending Welcome Email...', 'process');
-        await Api.sendWelcomeEmail(e, n);
         UI.toast('msg.welcome', 'success');
 
         // Set user language and load hub
