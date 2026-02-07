@@ -1,11 +1,11 @@
 /**
- * EvoRoutine v4.0 - Market Ready / Mobile First
+ * EvoRoutine v5.0 - Market Ready / Mobile First
  * Architecture: MVC with Async Store Simulation (DB Ready)
  */
 
 // --- 1. CONFIG & UTILS ---
 const Config = {
-    version: '4.0.0-RC1',
+    version: '5.0',
     env: 'production', // 'dev' or 'production'
     themeColor: '#8bc34a'
 };
