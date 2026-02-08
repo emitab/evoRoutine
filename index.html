@@ -8,7 +8,7 @@
     <title>EvoRoutine</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=5.0.1">
+    <link rel="stylesheet" href="styles.css?v=6.0.0">
 
     <!-- Firebase SDK (v9 - Modular) -->
     <!-- Removed for local version simplicity as per user request -->
@@ -65,13 +65,19 @@
                     <small data-bind="hub.hi">Welcome back,</small>
                 </div>
             </div>
-            <button class="icon-btn" onclick="App.loadSettings()" title="Settings">
-                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path d="M12 1v6m0 6v6M1 12h6m6 0h6"></path>
-                    <path d="m4.93 4.93 4.24 4.24m5.66 5.66 4.24 4.24M4.93 19.07l4.24-4.24m5.66-5.66 4.24-4.24"></path>
-                </svg>
-            </button>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <div class="theme-toggle" onclick="App.toggleTheme()" title="Toggle Theme">
+                    <div class="theme-toggle-slider"></div>
+                </div>
+                <button class="icon-btn" onclick="App.loadSettings()" title="Settings">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v6m0 6v6M1 12h6m6 0h6"></path>
+                        <path d="m4.93 4.93 4.24 4.24m5.66 5.66 4.24 4.24M4.93 19.07l4.24-4.24m5.66-5.66 4.24-4.24">
+                        </path>
+                    </svg>
+                </button>
+            </div>
         </nav>
 
         <div class="content">
@@ -420,8 +426,9 @@
             </div>
         </div>
     </div>
-    <script src="script.js?v=5.0.2"></script>
-    <script src="tutorial.js?v=5.0.2"></script>
+    <script src="script.js?v=6.0.0"></script>
+    <script src="tutorial.js?v=6.0.0"></script>
+    <script src="theme-toggle.js?v=6.0.0"></script>
 </body>
 
 </html>
