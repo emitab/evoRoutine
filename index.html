@@ -350,13 +350,15 @@
 
                 <button class="btn-circle-sm" onclick="App.adjustTimer(10)">+10</button>
             </div>
-
+            aqui quiero que sea todavia mas personalizado, por ejempli si aprietan en facil o muy fa
             <div style="display:flex; gap:16px;">
                 <button class="btn-time-adj" onclick="App.adjustTimer(-30)">-30s</button>
                 <button class="btn-time-adj" onclick="App.adjustTimer(30)">+30s</button>
             </div>
 
-            <p style="opacity:0.6; margin-top:24px;" data-bind="sess.recover">RECOVER</p>
+            <div id="rest-advisor" style="margin-top:24px; text-align:center; min-height:40px;">
+                <p style="opacity:0.6; margin:0;" data-bind="sess.recover">RECOVER</p>
+            </div>
         </div>
         <div class="fab-container">
             <button class="btn btn-primary" onclick="App.skipRest()" data-bind="sess.ready">READY</button>
